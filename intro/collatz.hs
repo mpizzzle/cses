@@ -1,17 +1,11 @@
-next :: (Integral a) => a -> a
-next n = if 0 == mod n 2 then div n 2 else 1 + 3 * n
+import Data.List
 
 collatz :: (Integral a) => [a] -> [a]
-collatz n = do
-  let h = head n
-  if (h == 1) then n else collatz (next h:n)
-
-parse :: String -> Int
-parse s = read s
+collatz c = do
+  let h = head c
+  if h == 1 then c else collatz ((if 0 == mod h 2 then div h 2 else 1 + 3 * h):c)
 
 main :: IO()
 main = do
-  line <- getLine
-  let result = collatz [parse line]
-  let format = foldl (\ x y -> y ++ " " ++ x) []
-  (putStrLn.format) [show r | r <- result]
+  line <- readLn
+  putStrLn (intercalate " " [show r | r <- (reverse.collatz) [line]])
