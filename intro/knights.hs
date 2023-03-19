@@ -1,8 +1,9 @@
 import Data.List
-import Data.Function
 
 knight :: Integer -> Integer
-knight n = div ((n^4) - (9 * n^2) + (n * 24) - 16) 2
+knight n = do
+ let q = n * n
+ (div (q * (q - 1)) 2) - 4 * (n - 1) * (n - 2)
 
 main :: IO ()
 main = do
