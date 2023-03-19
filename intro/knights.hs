@@ -2,10 +2,7 @@ import Data.List
 import Data.Function
 
 knight :: Integer -> Integer
-knight n = do
-  let q = n * n
-  let m = n - 4
-  (on (-) $ \x -> div x 2) (q * (q - 1)) (sum [(8 * m * m), (40 * m), 48])
+knight n = div ((n^4) - (9 * n^2) + (n * 24) - 16) 2
 
 main :: IO ()
 main = do
